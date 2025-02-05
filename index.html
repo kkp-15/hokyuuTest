@@ -31,13 +31,16 @@
     <h2>ハンガー計算</h2>
     <label for="hangerCount">ハンガー数:</label>
     <input type="number" id="hangerCount" min="0" oninput="calculate()">
-    <div class="result" id="result">槽１: 0 L (0.2 × 0)</div>
+    <div class="result" id="result1">槽１: 0 L (0.2 × 0)</div>
+    <div class="result" id="result2">槽２: 0 L (0.5 × 0)</div>
 
     <script>
         function calculate() {
             let hangerCount = document.getElementById("hangerCount").value;
-            let result = 0.2 * Number(hangerCount);
-            document.getElementById("result").textContent = `槽１: ${result.toFixed(2)} L (0.2 × ${hangerCount})`;
+            let result1 = 0.2 * Number(hangerCount);
+            let result2 = 0.5 * Number(hangerCount);
+            document.getElementById("result1").textContent = `槽１: ${result1.toFixed(2)} L (0.2 × ${hangerCount})`;
+            document.getElementById("result2").textContent = `槽２: ${result2.toFixed(2)} L (0.5 × ${hangerCount})`;
         }
     </script>
 </body>
