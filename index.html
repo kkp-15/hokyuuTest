@@ -10,37 +10,72 @@
             text-align: center;
             margin: 50px;
         }
+        .input-container {
+            margin-bottom: 20px;
+        }
+        .result-container {
+            display: flex;
+            justify-content: center;
+            gap: 50px;
+        }
+        .result-box {
+            width: 200px;
+            padding: 10px;
+            border: 1px solid #000;
+            text-align: center;
+            font-size: 18px;
+            font-weight: bold;
+        }
         input {
             padding: 5px;
             font-size: 16px;
             width: 100px;
-        }
-        button {
-            padding: 5px 10px;
-            font-size: 16px;
-            margin-left: 10px;
-        }
-        .result {
-            margin-top: 20px;
-            font-size: 18px;
-            font-weight: bold;
+            margin: 5px;
         }
     </style>
 </head>
 <body>
     <h2>ハンガー計算</h2>
-    <label for="hangerCount">ハンガー数:</label>
-    <input type="number" id="hangerCount" min="0" oninput="calculate()">
-    <div class="result" id="result1">槽１: 0 L (0.2 × 0)</div>
-    <div class="result" id="result2">槽２: 0 L (0.5 × 0)</div>
+    <div class="input-container">
+        <label for="dayHanger">昼（ハンガー数）:</label>
+        <input type="number" id="dayHanger" min="0" oninput="calculate()">
+        <label for="nightHanger">夜（ハンガー数）:</label>
+        <input type="number" id="nightHanger" min="0" oninput="calculate()">
+    </div>
+    <div class="result">総ハンガー数: <span id="totalHanger">0</span></div>
+    
+    <div class="result-container">
+        <div class="result-box">
+            <h3>昼</h3>
+            <div id="result1_day">槽１: 0 L (0.2 × 0)</div>
+            <div id="result2_day">槽２: 0 L (0.5 × 0)</div>
+        </div>
+        <div class="result-box">
+            <h3>夜</h3>
+            <div id="result1_night">槽１: 0 L (0.2 × 0)</div>
+            <div id="result2_night">槽２: 0 L (0.5 × 0)</div>
+            <div id="result3_night">槽３: 0 L (2 × 0)</div>
+        </div>
+    </div>
 
     <script>
         function calculate() {
-            let hangerCount = document.getElementById("hangerCount").value;
-            let result1 = 0.2 * Number(hangerCount);
-            let result2 = 0.5 * Number(hangerCount);
-            document.getElementById("result1").textContent = `槽１: ${result1.toFixed(2)} L (0.2 × ${hangerCount})`;
-            document.getElementById("result2").textContent = `槽２: ${result2.toFixed(2)} L (0.5 × ${hangerCount})`;
+            let dayHanger = Number(document.getElementById("dayHanger").value) || 0;
+            let nightHanger = Number(document.getElementById("nightHanger").value) || 0;
+            let totalHanger = dayHanger + nightHanger;
+            
+            let result1_day = 0.2 * dayHanger;
+            let result2_day = 0.5 * dayHanger;
+            let result1_night = 0.2 * nightHanger;
+            let result2_night = 0.5 * nightHanger;
+            let result3_night = 2 * totalHanger;
+            
+            document.getElementById("totalHanger").textContent = totalHanger;
+            document.getElementById("result1_day").textContent = `槽１: ${result1_day.toFixed(2)} L (0.2 × ${dayHanger})`;
+            document.getElementById("result2_day").textContent = `槽２: ${result2_day.toFixed(2)} L (0.5 × ${dayHanger})`;
+            document.getElementById("result1_night").textContent = `槽１: ${result1_night.toFixed(2)} L (0.2 × ${nightHanger})`;
+            document.getElementById("result2_night").textContent = `槽２: ${result2_night.toFixed(2)} L (0.5 × ${nightHanger})`;
+            document.getElementById("result3_night").textContent = `槽３: ${result3_night.toFixed(2)} L (2 × ${totalHanger})`;
         }
     </script>
 </body>
